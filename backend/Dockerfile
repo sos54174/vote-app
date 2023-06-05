@@ -1,6 +1,4 @@
-ARG BASE_IMAGE
-FROM ${BASE_IMAGE}
-
+FROM openjdk:11-jdk-slim
 
 ENV APP_NAME vote-backend-service
 
