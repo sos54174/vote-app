@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: vote-app-uat
+  name: vote-api-uat
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vote-api-uat
+      deploymentconfig: vote-api-uat
+  template:
+    metadata:
+      labels:
+        app: vote-api-uat
+        deploymentconfig: vote-api-uat
+    spec:
+      containers:
+      - env:
+        - name: TZ
+          value: Asia/Taipei
+        - name: JVM_OPTS
+          value: -Dfile.encoding=UTF-8 -XX:MaxRAMPercentage=80.0
+        image: {{image}}
+        imagePullPolicy: Always
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /VoteService/actuator/health
+            port: 8081
+            scheme: HTTP
+          initialDelaySeconds: 40
+          periodSeconds: 20
+          successThreshold: 1
+          timeoutSeconds: 300
+        name: vote-api
+        readinessProbe:
+          failureThreshold: 5
+          httpGet:
+            path: /VoteService/actuator/health
+            port: 8081
+            scheme: HTTP
+          initialDelaySeconds: 40
+          periodSeconds: 20
+          successThreshold: 1
+          timeoutSeconds: 300
+        resources:
+          requests:
+            cpu: "600m"
+            memory: "1Gi"
+          limits:
+            cpu: "600m"
+            memory: "1Gi"
+        volumeMounts:
+        - mountPath: /app/config/
+          name: app-config
+          readOnly: true
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: app-config
+        configMap:
+          defaultMode: 420
+          name: vote-api-uat-configmap
