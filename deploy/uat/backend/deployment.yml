@@ -2,23 +2,23 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: vote-app-dev
-  name: vote-api-dev
+    app: vote-app-uat
+  name: vote-api-uat
   namespace: default
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: vote-api-dev
+      app: vote-api-uat
   template:
     metadata:
       labels:
-        app: vote-api-dev
+        app: vote-api-uat
     spec:
       containers:
-      - image: sos54174/vote-app:devb383f4
+      - image: sos54174/vote-app:uatb383f4
         imagePullPolicy: Always
-        name: vote-api-dev
+        name: vote-api-uat
         resources:
           requests:
             cpu: "600m"
@@ -35,4 +35,4 @@ spec:
       - name: app-config
         configMap:
           defaultMode: 420
-          name: vote-api-dev-configmap
+          name: vote-api-uat-configmap

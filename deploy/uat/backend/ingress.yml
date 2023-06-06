@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: vote-ingress
+  namespace: default
+spec:
+  rules:
+    - host: 20.198.108.29.sslip.io
+      http:
+        paths:
+          - pathType: Prefix
+            path: /VoteService
+            backend:
+              service:
+                name: vote-api-uat
+                port:
+                  number: 8081

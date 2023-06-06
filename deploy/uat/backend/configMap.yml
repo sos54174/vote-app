@@ -2,8 +2,8 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   labels:
-    app: vote-app-dev
-  name: vote-api-dev-configmap
+    app: vote-app-uat
+  name: vote-api-uat-configmap
   namespace: default
 data:
   application.yml: |- 
@@ -18,30 +18,30 @@ data:
           file: file:///app/config/redisson.yml
 
     vote:
-      question: "這季NBA冠軍賽，你支持哪一隊呢？"
-      options:
-        - optionId: "01"
-          label: "金塊"
-          bgColor: "#000000"
-        - optionId: "02"
-          label: "熱火"
-          bgColor: "#000000"
-        - optionId: "03"
-          label: "湖人"
-          bgColor: "#000000"
-        - optionId: "04"
-          label: "勇士"
-          bgColor: "#000000"
+        question: "使用過以下哪些雲端平台？"
+        options:
+          - optionId: "01"
+            label: "RKE"
+            bgColor: "#000000"
+          - optionId: "02"
+            label: "AKS"
+            bgColor: "#000000"
+          - optionId: "03"
+            label: "GKE"
+            bgColor: "#000000"
+          - optionId: "04"
+            label: "OCP"
+            bgColor: "#000000"
 
   redisson.yml: |- 
     singleServerConfig:
-      address: "redis://vote-api-dev-redis:6379"
+      address: "redis://vote-api-uat-redis:6379"
       database: 0
       connectionMinimumIdleSize: 5
       connectionPoolSize: 200
       connectTimeout: 10000
       timeout: 20000
-      password: dev-redis
+      password: uat-redis
     threads: 8
     nettyThreads: 32
 
