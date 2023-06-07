@@ -18,20 +18,21 @@ data:
           file: file:///app/config/redisson.yml
 
     vote:
-        question: "使用過以下哪些雲端平台？"
-        options:
-          - optionId: "01"
-            label: "RKE"
-            bgColor: "#000000"
-          - optionId: "02"
-            label: "AKS"
-            bgColor: "#000000"
-          - optionId: "03"
-            label: "GKE"
-            bgColor: "#000000"
-          - optionId: "04"
-            label: "OCP"
-            bgColor: "#000000"
+      canDuplicate: false
+      question: "使用過以下哪些雲端平台？"
+      options:
+        - optionId: "01"
+          label: "RKE"
+          bgColor: "#000000"
+        - optionId: "02"
+          label: "AKS"
+          bgColor: "#000000"
+        - optionId: "03"
+          label: "GKE"
+          bgColor: "#000000"
+        - optionId: "04"
+          label: "OCP"
+          bgColor: "#000000"
 
   redisson.yml: |- 
     singleServerConfig:
